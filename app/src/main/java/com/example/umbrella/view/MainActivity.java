@@ -125,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements ViewContract{
 
                 //Toast.makeText(this, "" + zipCode + " " + units , Toast.LENGTH_SHORT).show();
 
-                //presenter.getForecasts(zipCode, units);
+                presenter.bindView(this);
+                presenter.initializeRetrofit();
+                presenter.getForecasts(zipCode, units);
             }
         }
     }

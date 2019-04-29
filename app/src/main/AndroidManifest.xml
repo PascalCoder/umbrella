@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.DetailsActivity"
-            android:label="Umbrella">
-
+            android:label="Umbrella"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.umbrella.view.MainActivity" />
         </activity>
         <activity android:name=".view.MainActivity">
             <intent-filter>

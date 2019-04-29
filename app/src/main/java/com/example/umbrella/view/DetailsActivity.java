@@ -25,7 +25,8 @@ public class DetailsActivity extends AppCompatActivity {
     EditText tvZipCode;
     Spinner spinner;
     ImageView ivArrow;
-    String zipCode, unit;
+    static String zipCode, unit = "";
+    static String system = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,22 +53,36 @@ public class DetailsActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(DetailsActivity.this, "" + spinner.getSelectedItem(), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(DetailsActivity.this, "" + tvZipCode.getText().toString(), Toast.LENGTH_SHORT).show();
+                unit = spinner.getSelectedItem().toString();
+                if(unit.equals("Celsius")){
+                    unit = "metric";
+                    system = "metric";
+                }else{
+                    unit = "imperial";
+                    system = "imperial";
+                }
+                zipCode = tvZipCode.getText().toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //spinner
-                //arrayAdapter.getItem(0);
+
             }
         });
-        unit = spinner.getSelectedItem().toString();
-        Toast.makeText(this, "" + unit, Toast.LENGTH_SHORT).show();
-        zipCode = tvZipCode.getText().toString();
+        //unit = spinner.getSelectedItem().toString();
+        if(unit.equals("Celsius")){
+            unit = "metric";
+        }else{
+            unit = "imperial";
+        }
+
+        //zipCode = tvZipCode.getText().toString();
 
         ivArrow = findViewById(R.id.iv_arrow);
         ivArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "" + unit, Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
         });
@@ -80,7 +95,7 @@ public class DetailsActivity extends AppCompatActivity {
         Log.d(TAG, "onBackPressed: Inside onBackPressed!");
         Intent replyIntent = new Intent(); //this, MainActivity.class
         replyIntent.putExtra(ZIPCODE_REPLY, zipCode);
-        replyIntent.putExtra(UNITS_REPLY, unit);
+        replyIntent.putExtra(UNITS_REPLY, system);
 
         Log.d(TAG, "onBackPressed: " + "Unit: " + unit);
 
