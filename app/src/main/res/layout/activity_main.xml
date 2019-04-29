@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#48b4e0"
+        android:background="@color/colorSkyBlue"
         android:padding="15dp"
         android:layout_marginBottom="2dp"
         android:paddingEnd="10dp"
@@ -53,7 +53,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_marginTop="10dp"
                 android:textSize="50dp"
-                android:text="11°"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/tv_condition"
                 android:layout_width="wrap_content"

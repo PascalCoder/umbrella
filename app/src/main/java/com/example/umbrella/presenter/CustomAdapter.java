@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.umbrella.R;
 import com.example.umbrella.model.ForecastList;
+import com.squareup.picasso.Picasso;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder>{
 
@@ -19,6 +20,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     private ForecastList dataSet;
     private String meridian = " AM";
     private int time;
+    private static String IMAGE_URL = "http://openweathermap.org/img/w/"; //10d.png
 
     public CustomAdapter(ForecastList dataSet){
         this.dataSet = dataSet;
@@ -33,14 +35,16 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.CustomViewHolder customViewHolder, int i) {
-        Log.d(TAG, "onBindViewHolder: " + dataSet.getList().size() + " " + dataSet.getCity().getName());
+        //Log.d(TAG, "onBindViewHolder: " + dataSet.getList().size() + " " + dataSet.getCity().getName());
 
         //customViewHolder.tvTemp1.setText("" + Math.round(Presenter.temp) + "°");
-        Presenter.lists[i].get(i).getDateTime();
+        String dateTime = Presenter.lists[i].get(i).getDateTime();
         if(i == 0){
             customViewHolder.tvDay.setText("Today");
         }else if(i == 1){
             customViewHolder.tvDay.setText("Tomorrow");
+        }else{
+            customViewHolder.tvDay.setText(dateTime.substring(0, dateTime.indexOf(' ')));
         }
 
         Log.d(TAG, "onBindViewHolder: " + Presenter.lists[4].get(0).getDateTime() + " " + i);
@@ -60,32 +64,42 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
         }
 
         if(i == 0){
-            String tvTime = "tvTime" + 1;
+            //String tvTime = "tvTime" + 1;
 
             for(int j = 0; j < Presenter.lists[0].size(); j++){
                 customViewHolder.timeTextViews[j].setText(getCleanTime(Presenter.lists[0].get(j).getDateTime()));
                 customViewHolder.tempTextViews[j].setText("" + Math.round(Presenter.lists[0].get(j).getMain().getTemp()) + "°");
+                String img = Presenter.lists[i].get(j).getWeather().get(0).getIcon();
+                Picasso.get().load(IMAGE_URL + img + ".png").into(customViewHolder.imageViews[j]);
             }
 
         }else if(i == 1){
             for(int j = 0; j < Presenter.lists[1].size(); j++){
                 customViewHolder.timeTextViews[j].setText(getCleanTime(Presenter.lists[1].get(j).getDateTime()));
                 customViewHolder.tempTextViews[j].setText("" + Math.round(Presenter.lists[1].get(j).getMain().getTemp()) + "°");
+                String img = Presenter.lists[i].get(j).getWeather().get(0).getIcon();
+                Picasso.get().load(IMAGE_URL + img + ".png").into(customViewHolder.imageViews[j]);
             }
         }else if(i == 2){
             for(int j = 0; j < Presenter.lists[i].size(); j++){
                 customViewHolder.timeTextViews[j].setText(getCleanTime(Presenter.lists[2].get(j).getDateTime()));
                 customViewHolder.tempTextViews[j].setText("" + Math.round(Presenter.lists[2].get(j).getMain().getTemp()) + "°");
+                String img = Presenter.lists[i].get(j).getWeather().get(0).getIcon();
+                Picasso.get().load(IMAGE_URL + img + ".png").into(customViewHolder.imageViews[j]);
             }
         }else if(i == 3){
             for(int j = 0; j < Presenter.lists[i].size(); j++){
                 customViewHolder.timeTextViews[j].setText(getCleanTime(Presenter.lists[3].get(j).getDateTime()));
                 customViewHolder.tempTextViews[j].setText("" + Math.round(Presenter.lists[3].get(j).getMain().getTemp()) + "°");
+                String img = Presenter.lists[i].get(j).getWeather().get(0).getIcon();
+                Picasso.get().load(IMAGE_URL + img + ".png").into(customViewHolder.imageViews[j]);
             }
         }else if(i == 4){
             for(int j = 0; j < Presenter.lists[i].size(); j++){
                 customViewHolder.timeTextViews[j].setText(getCleanTime(Presenter.lists[4].get(j).getDateTime()));
                 customViewHolder.tempTextViews[j].setText("" + Math.round(Presenter.lists[4].get(j).getMain().getTemp()) + "°");
+                String img = Presenter.lists[i].get(j).getWeather().get(0).getIcon();
+                Picasso.get().load(IMAGE_URL + img + ".png").into(customViewHolder.imageViews[j]);
             }
         }else{}
 
@@ -170,14 +184,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             tvTemp8 = itemView.findViewById(R.id.tv_temp_8);
             tempTextViews[7] = tvTemp8;
 
+            imageViews = new ImageView[8];
             ivImage1 = itemView.findViewById(R.id.iv_image_1);
+            imageViews[0] = ivImage1;
             ivImage2 = itemView.findViewById(R.id.iv_image_2);
+            imageViews[1] = ivImage2;
             ivImage3 = itemView.findViewById(R.id.iv_image_3);
+            imageViews[2] = ivImage3;
             ivImage4 = itemView.findViewById(R.id.iv_image_4);
+            imageViews[3] = ivImage4;
             ivImage5 = itemView.findViewById(R.id.iv_image_5);
+            imageViews[4] = ivImage5;
             ivImage6 = itemView.findViewById(R.id.iv_image_6);
+            imageViews[5] = ivImage6;
             ivImage7 = itemView.findViewById(R.id.iv_image_7);
+            imageViews[6] = ivImage7;
             ivImage8 = itemView.findViewById(R.id.iv_image_8);
+            imageViews[7] = ivImage8;
 
         }
 

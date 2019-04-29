@@ -68,16 +68,17 @@ public class Presenter implements PresenterContract {
                     Forecast day = new Forecast();
                     day.setTemps(new ArrayList<>());
                     day.setTimes(new ArrayList<>());
-                    viewContract.addForecast(response.body());
-                    Log.d(TAG, "onResponse: " + response.body().getList().size());
-
-                    day1Date = response.body().getList().get(0).getDateTime();
-                    day1Date = day1Date.substring(0, day1Date.indexOf(" "));
-                    daysDate[0] = day1Date;
 
                     city = response.body().getCity().getName();
                     temp = "" + response.body().getList().get(0).getMain().getTemp();
                     condition = response.body().getList().get(0).getWeather().get(0).getMain();
+                    viewContract.addForecast(response.body());
+
+                    Log.d(TAG, "onResponse: " + response.body().getList().size() + "temp: " + temp);
+
+                    day1Date = response.body().getList().get(0).getDateTime();
+                    day1Date = day1Date.substring(0, day1Date.indexOf(" "));
+                    daysDate[0] = day1Date;
 
                     String tempDate = response.body().getList().get(0).getDateTime();
                     tempDate = tempDate.substring(0, tempDate.indexOf(" "));
